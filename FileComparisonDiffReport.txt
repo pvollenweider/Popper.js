@@ -1,0 +1,71 @@
+--- 	2017-09-04 07:19:51 +0000
++++ 	2017-09-04 07:19:51 +0000
+@@ -1,51 +1,64 @@
+ <?xml version="1.0"?>
+ <!DOCTYPE configuration SYSTEM "https://devtools.jahia.com/nexus/content/sites/jahia-site/dtd/indexing-configuration-1.2.1-jahia.dtd">
+ <configuration xmlns:j="http://www.jahia.org/jahia/1.0"
+                xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:jnt='http://www.jahia.org/jahia/nt/1.0'
+-               xmlns:mix="http://www.jcp.org/jcr/mix/1.0">
++               xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:jacademy="http://www.jahia.org/academy/jahia/nt/1.0">
+ 
+     <!-- see http://wiki.apache.org/jackrabbit/IndexingConfiguration for details -->
+ 
+     <!--
+ Sometimes it is useful to include the contents of descendant nodes into a single node to easier search on content that is scattered across multiple nodes.
+ Jackrabbit allows you to define index aggregates based on relative path patterns and primary node types.
+ The following example creates an index aggregate on jnt:file that includes the content of the jcr:content node:
+     -->
+     <aggregate primaryType="jnt:file">
+         <include primaryType="jnt:resource">jcr:content</include>
+     </aggregate>
+ 
++    <index-rule nodeType="jnt:resource">
++        <property boost="0.1">j:extractedText</property>
++        <property isRegexp="true">.*:.*</property>
++    </index-rule>
++
+     <index-rule nodeType="jnt:page">
+-        <property boost="3.0">jcr:title</property>
++        <property boost="100.0">jcr:title</property>
++        <property boost="75.0">jcr:description</property>
++        <property boost="50.0">alternateTitle</property>
+         <property isRegexp="true">.*:.*</property>
+     </index-rule>
+ 
+     <index-rule nodeType="mix:title">
+-        <property boost="2.0">jcr:title</property>
++        <property boost="35.0">jcr:title</property>
++        <property isRegexp="true">.*:.*</property>
++    </index-rule>
++
++    <index-rule nodeType="jacademy:boost" boost="2.0">
++        <property boost="35.0">jcr:title</property>
++        <property boost="15.0">textContent</property>
+         <property isRegexp="true">.*:.*</property>
+     </index-rule>
+ 
+     <!--
+     You can exclued content from indexation for a nodetype and a path by using the exclude tag.
+     attributes :
+      - nodetype (mandatory) : nodetype to exclude from index
+      - path : path of content to be exclude from indexation
+      - isRegexp : if true, false by default, the path is a read as a regular expression.
+ 
+     examples :
+     <exclude nodetype="jnt:page"/>
+     <exclude nodetype="jnt:file" path="/sites/ACMESPACE/files/nonIndexedFiles"/>
+     <exclude nodetype="jnt:file" path="^/sites/ACMESPACE/files/nonIndexedFilesRegex/.*" isRegexp="true"/>
+ 
+     -->
+-
++    <exclude nodetype="jnt:file" path="^/sites/academy/files/.*"  isRegexp="true"/>
+     <i18ncopy>
+         <exclude-property>j:locktoken</exclude-property>
+         <exclude-property>j:lockTypes</exclude-property>
+         <exclude-property>jcr:lockIsDeep</exclude-property>
+         <exclude-property>jcr:lockOwner</exclude-property>
+         <exclude-property>jcr:language</exclude-property>
+         <exclude-property>jcr:lastModified</exclude-property>
+         <exclude-property>jcr:lastModifiedBy</exclude-property>
+         <exclude-property>j:lastPublished</exclude-property>
+         <exclude-property>j:lastPublishedBy</exclude-property>
