@@ -28,7 +28,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <groupId>org.jahia.modules</groupId>
     <artifactId>popperjs</artifactId>
     <name>popper.js</name>
-    <version>1.16.0</version>
+    <version>1.16.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>A kickass library used to manage poppers in web applications. Popper.js is a positioning engine, its purpose is to calculate the position of an element to make it possible to position it near a given reference element.</description>
 
@@ -36,7 +36,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <connection>scm:git:git@github.com:pvollenweider/popper.js.git</connection>
         <developerConnection>scm:git:git@github.com:pvollenweider/popper.js.git</developerConnection>
         <url>scm:git:https://github.com/pvollenweider/popper.js.git</url>
-      <tag>popperjs-1.16.0</tag>
+      <tag>popperjs-1.11.1</tag>
   </scm>
 
     <repositories>
